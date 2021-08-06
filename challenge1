@@ -1,0 +1,72 @@
+##########################################################################
+Kevin and Stuart want to play the 'The Minion Game'.
+
+Game Rules
+
+Both players are given the same string, .
+Both players have to make substrings using the letters of the string .
+Stuart has to make words starting with consonants.
+Kevin has to make words starting with vowels.
+The game ends when both players have made all possible substrings.
+
+Scoring
+A player gets +1 point for each occurrence of the substring in the string .
+
+For Example:
+String  = BANANA
+Kevin's vowel beginning word = ANA
+Here, ANA occurs twice in BANANA. Hence, Kevin will get 2 Points.
+#########################################################################
+
+def minion_game(word):
+    maxWindow = len(word)
+    KScore = 0
+    SScore = 0
+    vowels = ['A', 'E', 'I', 'O', 'U']
+    name = ''
+    score = 0
+
+    for i in range(1, len(word) + 1, 1):
+        for j in range(0, len(word), 1):
+            if j + i <= len(word):
+                group = word[j:j + i]
+                if group[0] in vowels:
+                    KScore += 1
+
+                else:
+                    SScore += 1
+    if KScore > SScore:
+        name = 'Kevin'
+        score = KScore
+        print(name, score)
+    elif SScore > KScore:
+        name = 'Stuart'
+        score = SScore
+        print(name, score)
+    elif KScore == SScore:
+        print('Draw')
+
+    def minion_game_performance(word):
+
+        vowels = ['A', 'E', 'I', 'O', 'U']
+        KScore = 0
+        SScore = 0
+        for i in range(len(word)):
+            if word[i] in vowels:
+                KScore += (len(word) - i)
+            else:
+                SScore += (len(word) - i)
+
+        if KScore > SScore:
+            print("Kevin", KScore)
+        elif KScore < SScore:
+            print("Stuart", SScore)
+        else:
+            print("Draw")
+
+
+
+if __name__ == '__main__':
+        s = 'BANANA'
+        print('START')
+        minion_game(s)
